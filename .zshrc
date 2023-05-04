@@ -104,6 +104,8 @@ alias ts="tmux-sessionizer"
 alias av="source ./venv/bin/activate"
 alias cv="python3 -m venv venv"
 
+source /home/zetrext/personal/dotfiles/.priv-zshrc
+
 export EDITOR=nvim
 
 # Monitor scaling
