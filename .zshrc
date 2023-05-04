@@ -104,7 +104,10 @@ alias ts="tmux-sessionizer"
 alias av="source ./venv/bin/activate"
 alias cv="python3 -m venv venv"
 
+
+# SETUP PRIVATE PARTS
 source /home/zetrext/personal/dotfiles/.priv-zshrc
+source /home/zetrext/personal/dotfiles/work/.zshrc
 
 export EDITOR=nvim
 
