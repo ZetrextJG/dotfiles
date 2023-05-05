@@ -101,7 +101,7 @@ alias matlab="matlab -softwareopengl ."
 
 alias "docker a"="docker attach --sig-proxy=false"
 
-alias update_worktree="git fetch origin 'refs/heads/*:refs/heads/*'"
+alias uw="update-worktree"
 alias ts="tmux-sessionizer"
 
 alias av="source ./venv/bin/activate"
