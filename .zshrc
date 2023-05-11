@@ -69,7 +69,7 @@ zstyle :prompt:pure:git:branch          color "#329F5B"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git fzf-zsh-plugin)
+plugins=(git fzf-zsh-plugin zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -92,6 +92,7 @@ function cs () {
     z "$@" && exa
 }
 alias cd="cs"
+
 alias v="nvim"
 alias ra="ranger"
 alias c="clear"
@@ -100,21 +101,29 @@ alias matlab="matlab -softwareopengl ."
 
 alias "docker a"="docker attach --sig-proxy=false"
 
+alias uw="update-worktree"
 alias ts="tmux-sessionizer"
+
 alias av="source ./venv/bin/activate"
 alias cv="python3 -m venv venv"
 
 
 # SETUP PRIVATE PARTS
-source /home/zetrext/personal/dotfiles/.priv-zshrc
-source /home/zetrext/personal/dotfiles/work/.zshrc
+if [ -f ~/personal/dotfiles/.priv-zshrc ]; then
+    source /home/zetrext/personal/dotfiles/.priv-zshrc
+fi
+if [ -f ~/personal/dotfiles/work/.zshrc ]; then
+    source /home/zetrext/personal/dotfiles/work/.zshrc
+fi
 
+# OTHER
 export EDITOR=nvim
 
 # Monitor scaling
 export GDK_SCALE=0.5
 
 # Zoxide setup
+compinit
 eval "$(zoxide init zsh)"
 
 # Custom fzf keybinds
@@ -128,9 +137,6 @@ export PATH=$PATH:/home/zetrext/.spicetify
 
 # Rofi themes
 export PATH=$HOME/.config/rofi/bin:$PATH
-
-# Syntax highlighting
-source /home/zetrext/repos/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # Setup tmux colors
 export TERM="xterm-256color"
@@ -162,4 +168,11 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
+
+# NVM setup
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+
 

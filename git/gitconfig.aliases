@@ -1,0 +1,25 @@
+# Include this in your own .gitconfig by using the
+# [include] directive with the path to this file
+#
+# [include]
+#    path = ~/gitconfig.aliases
+#
+# If you don't have any existing includes, you can add this via the following command
+# 
+#   git config --global include.path ~/.gitconfig.aliases
+#
+
+[alias]
+    st = status
+    cc = commit
+    ca = commit --amend
+    d = diff
+    ds = diff --staged
+	dh = diff ORIG_HEAD
+    rt = reset --soft HEAD^
+    res = restore --staged
+    last = log -1 HEAD --stat
+    ahead = log ORIG_HEAD..HEAD
+    abort = rebase --abort
+
+
