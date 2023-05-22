@@ -13,13 +13,19 @@
     st = status
     cc = commit
     ca = commit --amend
+    subup = submodule update --init --recursive
     d = diff
     ds = diff --staged
-	dh = diff ORIG_HEAD
+    dh = diff ORIG_HEAD
+    df = diff --no-index
     rt = reset --soft HEAD^
     res = restore --staged
+    abort = rebase --abort
     last = log -1 HEAD --stat
     ahead = log ORIG_HEAD..HEAD
-    abort = rebase --abort
+    wp = "!f() { git worktree add \"$1\" \"$1\"; }; f"
+    wb = "!f() { git worktree add -b \"$1\" \"$1\" \"$2\"; }; f"
+    
+
 
 

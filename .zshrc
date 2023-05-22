@@ -69,7 +69,7 @@ zstyle :prompt:pure:git:branch          color "#329F5B"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git fzf-zsh-plugin zsh-syntax-highlighting)
+plugins=(zsh-autosuggestions git fzf-zsh-plugin zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -131,6 +131,10 @@ bindkey -r "^O"
 bindkey "^O" fzfv.sh
 bindkey -r "^K"
 bindkey "^K" fkill.sh
+
+# More custome keybinds
+bindkey -r "^G"
+bindkey -s "^G" 'git status^M'
 
 # Spicetify setup
 export PATH=$PATH:/home/zetrext/.spicetify
