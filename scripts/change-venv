@@ -1,0 +1,6 @@
+#!/bin/bash
+# For this script to work you need to source it
+
+([[ "$VIRTUAL_ENV" != "" ]] && deactivate); source $1/venv/bin/activate
+
+
