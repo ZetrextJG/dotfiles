@@ -65,10 +65,10 @@ alias cv="python3 -m venv venv"
 
 # SETUP PRIVATE PARTS
 if [ -f ~/personal/dotfiles/.priv-zshrc ]; then
-    source /home/zetrext/personal/dotfiles/.priv-zshrc
+    source ~/personal/dotfiles/.priv-zshrc
 fi
 if [ -f ~/personal/dotfiles/work/.zshrc ]; then
-    source /home/zetrext/personal/dotfiles/work/.zshrc
+    source ~/personal/dotfiles/work/.zshrc
 fi
 
 # OTHER
