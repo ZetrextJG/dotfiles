@@ -85,7 +85,7 @@ bindkey "^K" fkill.sh
 
 # More custome keybinds
 bindkey -r "^G"
-bindkey -s "^G" 'git status^M'
+bindkey -s "^G" 'git status\n'
 
 # Spicetify setup
 export PATH=$PATH:/home/zetrext/.spicetify
