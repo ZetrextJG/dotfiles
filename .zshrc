@@ -34,8 +34,11 @@ fi
 # Setup rust
 source "$HOME/.cargo/env"
 
-# Aliases
+# Zoxide setup
+compinit
+eval "$(zoxide init zsh)"
 
+# Aliases
 alias ls="exa"
 alias l="exa -lh"
 alias ll="exa -alh"
@@ -61,6 +64,8 @@ alias ts="tmux-sessionizer"
 
 alias av="source ./venv/bin/activate"
 alias cv="python3 -m venv venv"
+
+alias eu_setup="cv && av && git subup && pip install ./rust_annotator && pip install -r linguistic-expertise/requirements.txt -r requirements.txt && pip install ./linguistic-expertise"
 
 
 # SETUP PRIVATE PARTS
@@ -126,8 +131,5 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-# Zoxide setup
-compinit
-eval "$(zoxide init zsh)"
-
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
