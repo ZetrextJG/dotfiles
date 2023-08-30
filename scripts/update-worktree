@@ -1,6 +1,7 @@
 #!/bin/bash
 
 echo 'Updating worktree...'; 
+cd $(git rev-parse --git-common-dir)
 git fetch origin 'refs/heads/*:refs/remotes/origin/*';
 echo 'Update done.';
 read;
