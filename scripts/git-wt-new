@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+
+if [[ -z $1 ]]; then
+  echo "Provide a name for the new branch"
+	exit 0
+fi
+
+set -e
+
+if ( ! git rev-parse --git-common-dir > /dev/null ); then
+  echo "You are not in a git worktree"
+  exit 1
+fi
+
+set +e
+
+# Cd into the base worktree
+git_worktree_base=$(git rev-parse --git-common-dir)
+cd "$git_worktree_base"
+
+# Update worktree and accept changes
+echo | update-worktree
+
+# Let the user pick from the branches in origin
+branch_names=$(find ./refs/remotes/origin -mindepth 1 -maxdepth 1 -type f)
+selected=$(echo "$branch_names" | fzf --header="Select base for the new branch")
+
+# Cancel if nothing choosen
+if [[ -z $selected ]]; then
+	exit 0
+fi
+
+
+selected_name=$(basename "$selected" | tr . _)
+
+git worktree add -b $1 $1 $selected_name
+

@@ -23,8 +23,8 @@
     abort = rebase --abort
     last = log -1 HEAD --stat
     ahead = log ORIG_HEAD..HEAD
-    wp = "!f() { git worktree add \"$1\" \"$1\"; }; f"
-    wb = "!f() { git worktree add -b \"$1\" \"$1\" \"$2\"; }; f"
+    wtadd = "!git-wt-add"
+    wtnew = "!git-wt-new"
     
 
 

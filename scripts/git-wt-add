@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+set -e
+
+if ( ! git rev-parse --git-common-dir > /dev/null ); then
+  echo "You are not in a git worktree"
+  exit 1
+fi
+
+set +e
+
+# Cd into the base worktree
+git_worktree_base=$(git rev-parse --git-common-dir)
+cd "$git_worktree_base"
+
+# Update worktree and accept changes
+echo | update-worktree
+
+# Let the user pick from the branches in origin
+branch_names=$(find ./refs/remotes/origin -mindepth 1 -maxdepth 1 -type f)
+selected=$(echo "$branch_names" | fzf --header="Select branch to checkout")
+
+if [[ -z $selected ]]; then
+	exit 0
+fi
+
+selected_name=$(basename "$selected" | tr . _)
+git worktree add $selected_name
+
