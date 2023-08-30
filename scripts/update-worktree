@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo 'Updating worktree...'; 
-git fetch origin 'refs/heads/*:refs/heads/*';
+git fetch origin 'refs/heads/*:refs/remotes/origin/*';
 echo 'Update done.';
 read;
 
