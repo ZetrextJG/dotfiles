@@ -67,6 +67,9 @@ alias cv="python3 -m venv venv"
 
 alias eu_setup="cv && av && git subup && pip install ./rust_annotator && pip install -r linguistic-expertise/requirements.txt -r requirements.txt && pip install ./linguistic-expertise"
 
+alias exp="/mnt/c/Windows/explorer.exe"
+alias todo="nvim ~/personal/TODO.md"
+
 
 # SETUP PRIVATE PARTS
 if [ -f ~/personal/dotfiles/.priv-zshrc ]; then
