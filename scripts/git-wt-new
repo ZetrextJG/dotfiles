@@ -18,9 +18,6 @@ set +e
 git_worktree_base=$(git rev-parse --git-common-dir)
 cd "$git_worktree_base"
 
-# Update worktree and accept changes
-echo | update-worktree
-
 # Let the user pick from the branches in origin
 branch_names=$(find ./refs/remotes/origin -mindepth 1 -maxdepth 1 -type f)
 selected=$(echo "$branch_names" | fzf --header="Select base for the new branch")
