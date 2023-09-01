@@ -62,7 +62,7 @@ alias "docker a"="docker attach --sig-proxy=false"
 alias uw="update-worktree"
 alias ts="tmux-sessionizer"
 
-alias av="source ./venv/bin/activate"
+alias av="source ./venv/bin/activate && which python"
 alias cv="python3 -m venv venv"
 
 alias eu_setup="cv && av && git subup && pip install ./rust_annotator && pip install -r linguistic-expertise/requirements.txt -r requirements.txt && pip install ./linguistic-expertise"
