@@ -136,3 +136,7 @@ export NVM_DIR="$HOME/.nvm"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+export FLYCTL_INSTALL="/home/zetrext/.fly"
+export PATH="$FLYCTL_INSTALL/bin:$PATH"
+
+
