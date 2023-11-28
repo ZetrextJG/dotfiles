@@ -3,11 +3,7 @@
 if [[ $# -eq 1 ]]; then
 	selected=$1
 else
-	if [[ $USER == "zetrext" ]]; then
-		selected=$(find ~/Code ~/personal -mindepth 1 -maxdepth 1 -type d | fzf)
-	else
-		selected=$(find ~/code ~/code3 -mindepth 1 -maxdepth 1 -type d | fzf)
-	fi
+	selected=$(work-dirs | fzf)
 fi
 
 if [[ -z $selected ]]; then

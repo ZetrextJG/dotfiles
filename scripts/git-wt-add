@@ -2,9 +2,9 @@
 
 set -e
 
-if ( ! git rev-parse --git-common-dir > /dev/null ); then
-  echo "You are not in a git worktree"
-  exit 1
+if (! git rev-parse --git-common-dir >/dev/null); then
+	echo "You are not in a git worktree"
+	exit 1
 fi
 
 set +e
@@ -24,3 +24,5 @@ fi
 selected_name=$(basename "$selected" | tr . _)
 git worktree add $selected_name
 
+cd "$git_worktree_base/$selected_name"
+git branch --set-upstream-to=origin/$selected_name $selected_name

@@ -1,6 +1,6 @@
 import = [
-  "/home/zetrext/.config/alacritty/tokyo.toml",
-  "/home/zetrext/.config/alacritty/fonts-main.toml",
+  "~/.config/alacritty/tokyo.toml",
+  "~/.config/alacritty/fonts-main.toml",
 ]
 live_config_reload = true
 

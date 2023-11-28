@@ -1,0 +1,10 @@
+#!/usr/bin/bash
+
+search_dirs=(
+	~/Code
+	~/code
+	~/codeB3
+	~/personal
+)
+
+printf '%s\n' "${search_dirs[@]}" | xargs -I{} find {} -mindepth 1 -maxdepth 1 -type d 2>/dev/null
