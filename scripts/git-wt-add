@@ -22,7 +22,7 @@ if [[ -z $selected ]]; then
 fi
 
 selected_name=$(basename "$selected" | tr . _)
-git worktree add $selected_name
 
-cd "$git_worktree_base/$selected_name"
-git branch --set-upstream-to=origin/$selected_name $selected_name
+echo "Adding worktree for origin branch $selected_name"
+git worktree add "$selected_name"
+git branch --set-upstream-to=origin/"$selected_name" "$selected_name"

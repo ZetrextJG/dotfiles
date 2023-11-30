@@ -25,6 +25,7 @@
     ahead = log ORIG_HEAD..HEAD
     wtadd = "!git-wt-add"
     wtnew = "!git-wt-new"
+    wtclone = "!git-wt-clone"
     
 
 

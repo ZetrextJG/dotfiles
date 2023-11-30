@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+if [[ -z $1 ]]; then
+	echo "Provide clone URL"
+	exit 0
+fi
+
+# Clone the repo
+repo_name=$(echo "$1" | sed "s/^.*\/\(.*\).git$/\1/")
+git clone --bare "$1" "$repo_name"
+
+# Exit if errors
+if [ $? -ne 0 ]; then
+	echo "Could not find the repository"
+	exit 1
+fi
+
+# Setup git fetch updating
+cd "$repo_name"
+git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
+
+# Initial fetch --all
+git fetch --all
