@@ -38,71 +38,11 @@ source "$HOME/.cargo/env"
 compinit
 eval "$(zoxide init zsh)"
 
-# Aliases
-alias ls="exa"
-alias l="exa -lh"
-alias ll="exa -alh"
-alias tree="exa --tree"
 
-function cs () {
-    z "$@" && exa
-}
-alias cd="cs"
-
-alias v="nvim"
-alias ra="ranger"
-alias c="clear"
-
-alias tmux="tmux -u" # Always output utf-8 characters in tmux
-
-alias matlab="matlab -softwareopengl ."
-
-alias "docker a"="docker attach --sig-proxy=false"
-
-alias uw="update-worktree"
-alias ts="tmux-sessionizer"
-
-alias av="source ./.venv/bin/activate && which python"
-alias cv="python3 -m venv .venv"
-
-alias eu_setup="cv && av && git subup && pip install ./rust_annotator && pip install -r linguistic-expertise/requirements.txt -r requirements.txt && pip install ./linguistic-expertise"
-
-alias exp="/mnt/c/Windows/explorer.exe"
-alias todo="nvim ~/personal/TODO.md"
-
-
-# SETUP PRIVATE PARTS
-if [ -f ~/personal/dotfiles/.priv-zshrc ]; then
-    source ~/personal/dotfiles/.priv-zshrc
-fi
-if [ -f ~/personal/dotfiles/work/.zshrc ]; then
-    source ~/personal/dotfiles/work/.zshrc
-fi
-
-# OTHER
-export EDITOR=nvim
-
-# Monitor scaling
-export GDK_SCALE=0.5
-
-# Custom fzf keybinds
-bindkey -r "^O"
-bindkey "^O" fzfv.sh
-bindkey -r "^K"
-bindkey "^K" fkill.sh
-
-# More custome keybinds
-bindkey -r "^G"
-bindkey -s "^G" 'git status\n'
-
-# Spicetify setup
-export PATH=$PATH:/home/zetrext/.spicetify
 
 # Rofi themes
 export PATH=$HOME/.config/rofi/bin:$PATH
 
-# Setup tmux colors
-export TERM="xterm-256color"
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 # export SDKMAN_DIR="$HOME/.sdkman"
@@ -114,29 +54,5 @@ export PATH="$HOME/.local/bin:$PATH"
 # User scripts
 export PATH="$HOME/.local/scripts:$PATH"
 
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/zetrext/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/home/zetrext/miniconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/zetrext/miniconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/home/zetrext/miniconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
 
-# NVM setup
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-export FLYCTL_INSTALL="/home/zetrext/.fly"
-export PATH="$FLYCTL_INSTALL/bin:$PATH"
-
-
+export PATH="$PATH:$HOME/minio-binaries/"

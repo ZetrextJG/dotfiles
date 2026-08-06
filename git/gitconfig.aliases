@@ -23,6 +23,7 @@
     abort = rebase --abort
     last = log -1 HEAD --stat
     ahead = log ORIG_HEAD..HEAD
+    slog = log --graph --oneline --all
     wtadd = "!git-wt-add"
     wtnew = "!git-wt-new"
     wtclone = "!git-wt-clone"

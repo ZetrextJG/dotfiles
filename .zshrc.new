@@ -1,0 +1,195 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+# Zinit setup
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
+[ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"
+[ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+source "${ZINIT_HOME}/zinit.zsh"
+
+# Powerlevel10k with config
+zinit ice depth=1; zinit light romkatv/powerlevel10k
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# Syntax Highlighting and Completion
+zinit light zsh-users/zsh-syntax-highlighting
+zinit light zsh-users/zsh-completions
+zinit light zsh-users/zsh-autosuggestions
+
+# Load NVM in Turbo mode (waits 0 seconds after prompt)
+zinit ice wait"0" lucid
+zinit snippet OMZ::plugins/nvm/nvm.plugin.zsh
+export NVM_DIR="$HOME/.nvm"
+
+# Setup tmux colors
+export TERM="xterm-256color"
+
+# FZF
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# Python binaries
+export PATH="$HOME/.local/bin:$PATH"
+
+# User scripts
+export PATH="$HOME/.local/scripts:$PATH"
+
+# Setup rust
+source "$HOME/.cargo/env"
+
+# Setup go
+export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin
+
+# Setup ghcup (haskell)
+[ -f "/home/zetrext/.ghcup/env" ] && . "/home/zetrext/.ghcup/env" # ghcup-env
+
+# Setup zoxide
+eval "$(zoxide init zsh)"
+
+# Dont waste terminal boot time on loading conda
+conda() {
+    unset -f conda
+    export PATH="/home/zetrext/miniconda3/bin:$PATH"
+    if [ -f "/home/zetrext/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/zetrext/miniconda3/etc/profile.d/conda.sh"
+    fi
+    conda "$@"
+}
+
+# # The next line updates PATH for the Google Cloud SDK.
+# if [ -f '/home/zetrext/repos/google-cloud-sdk/path.zsh.inc' ]; then . '/home/zetrext/repos/google-cloud-sdk/path.zsh.inc'; fi
+#
+# # The next line enables shell command completion for gcloud.
+# if [ -f '/home/zetrext/repos/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/zetrext/repos/google-cloud-sdk/completion.zsh.inc'; fi
+
+# FLYCTL
+# export FLYCTL_INSTALL="/home/zetrext/.fly"
+# export PATH="$FLYCTL_INSTALL/bin:$PATH"
+
+# Language
+export LANG="en_US.UTF-8"
+
+# Default editor
+if [[ -n $SSH_CONNECTION ]]; then
+	export EDITOR='vim'
+else
+	export EDITOR='nvim'
+fi
+
+# History
+HISTSIZE=5000
+HISTFILE=~/.zsh_history
+SAVEHIST=$HISTSIZE
+HISTDUP=erase
+setopt appendhistory
+setopt sharehistory
+setopt hist_ignore_space
+setopt hist_save_no_dups
+setopt hist_ignore_dups
+setopt hist_find_no_dups
+
+
+# Aliases
+alias ls="exa"
+alias l="exa -lh"
+alias ll="exa -alh"
+alias tree="exa --tree"
+
+function cz () {
+    cd "$@" && exa
+}
+alias cd="cz"
+
+function cs () {
+  z "$@" && exa
+}
+
+alias v="nvim"
+alias ra="ranger"
+alias c="clear"
+
+alias tmux="tmux -u" # Always output utf-8 characters in tmux
+
+alias matlab="matlab -softwareopengl ."
+
+alias "docker a"="docker attach --sig-proxy=false"
+
+alias uw="update-worktree"
+alias ts="tmux-sessionizer"
+
+alias av="source ./.venv/bin/activate && which python"
+alias cv="python3 -m venv .venv"
+
+alias eu_setup="cv && av && git subup && pip install ./rust_annotator && pip install -r linguistic-expertise/requirements.txt -r requirements.txt && pip install ./linguistic-expertise"
+
+alias exp="/mnt/c/Windows/explorer.exe"
+alias todo="nvim ~/personal/TODO.md"
+
+# Custom fzf keybinds
+bindkey -r "^O"
+bindkey "^O" fzfv.sh
+bindkey -r "^K"
+bindkey "^K" fkill.sh
+
+# More custome keybinds
+bindkey -r "^G"
+bindkey -s "^G" 'git status\n'
+bindkey '^p' history-search-backward
+bindkey '^n' history-search-forward
+
+# SETUP PRIVATE PARTS
+if [ -f ~/personal/dotfiles/.priv-zshrc ]; then
+    source ~/personal/dotfiles/.priv-zshrc
+fi
+if [ -f ~/personal/dotfiles/work/.zshrc ]; then
+    source ~/personal/dotfiles/work/.zshrc
+fi
+
+# Smart compinit with one day cache
+autoload -Uz compinit
+if [ "$(date '+%Y-%m-%d')" != "$(stat -c %y ~/.zcompdump | cut -d' ' -f1)" ]; then
+    compinit
+else
+    compinit -C
+fi
+
+# Editing mode 
+set -o emacs
+
+bindkey '^[[1;5C' forward-word # Ctrl
+bindkey '^[[1;5D' backward-word
+bindkey '^[[1;3C' forward-word # Alt
+bindkey '^[[1;3D' backward-word
+bindkey '^[[1;2C' forward-char # Shift
+bindkey '^[[1;2D' backward-char
+
+alias sshmnt="sshfs eden:/mnt/evafs/groups/mi2lab /mnt/evafs/groups/mi2lab"
+
+alias sshpass="ssh -o PreferredAuthentications=password -o PubkeyAuthentication=no -o PasswordAuthentication=yes "
+
+source ~/.claude-pass.sh
+
+. "/home/zetrext/.deno/env"
+
+# bun completions
+[ -s "/home/zetrext/.bun/_bun" ] && source "/home/zetrext/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+
+s () {
+  local selected
+  selected=$(ls ./.devel/scripts/* | fzf)
+  if [[ -n "$selected" ]]; then
+    bash "$selected" 
+  fi
+}
+
+
+# Generated for envman. Do not edit.
+[ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
